@@ -1,33 +1,35 @@
 <template>
   <div id="app">
     <section class="left_side">
-    <el-menu
-      :default-active="activeIndex2"
-      class="el-menu-demo"
-      mode="vertical"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-      <el-menu-item index="1">个人中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">文章类别</template>
-        <el-menu-item index="2-1">随感</el-menu-item>
-        <el-menu-item index="2-2">旅行</el-menu-item>
-        <el-menu-item index="2-3">音乐</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">技术</template>
-          <el-menu-item index="2-4-1">Angular</el-menu-item>
-          <el-menu-item index="2-4-2">Vue</el-menu-item>
-          <el-menu-item index="2-4-3">React</el-menu-item>
+      <div class="nav_title"></div>
+    <!--   <el-menu
+        :default-active="activeIndex2"
+        class="el-menu-demo"
+        mode="vertical"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1">个人中心</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">文章类别</template>
+          <el-menu-item index="2-1">随感</el-menu-item>
+          <el-menu-item index="2-2">旅行</el-menu-item>
+          <el-menu-item index="2-3">音乐</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">技术</template>
+            <el-menu-item index="2-4-1">Angular</el-menu-item>
+            <el-menu-item index="2-4-2">Vue</el-menu-item>
+            <el-menu-item index="2-4-3">React</el-menu-item>
+          </el-submenu>
         </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3">消息中心</el-menu-item>
-      <el-menu-item index="4">文章管理</el-menu-item>
-    </el-menu>
+        <el-menu-item index="3">消息中心</el-menu-item>
+        <el-menu-item index="4">文章管理</el-menu-item>
+      </el-menu> -->
     </section>
     <section class="right_side">
       <p>
+        <router-link to="/">Go to Home</router-link>
         <router-link to="/articleOverview">Go to Overview</router-link>
         <router-link to="/articleDetail">Go to Detail</router-link>
       </p>
@@ -60,7 +62,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 60%;
+  width: 100%;
   margin: auto;
   min-height: 100%;
   position: relative;
@@ -69,11 +71,18 @@ export default {
 }
 .left_side {
   float: left;
-  width: 220px
+  width: 240px;
+  background-color: rgb(84, 92, 100);
+}
+.nav_title {
+  height: 800px;
+}
+.el-menu {
+  height: 800px;
 }
 .right_side {
   flex: 13;
-  padding: 1em 2em;
+  padding: 1em 1em;
   overflow: hidden;
 }
 </style>
