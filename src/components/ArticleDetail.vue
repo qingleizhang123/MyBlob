@@ -1,21 +1,47 @@
 <template>
   <article>
-    <h1>深入理解js事件循环机制(Node.js篇)</h1>
+    <h1>{{ article.title }}</h1>
     <aside>
-      <span class="tag">javascript</span>
-      <span class="tag">eventloop</span>
-      <span class="tag">Node.js</span>
+      <span class="tag" v-for="(value, index) in tagArr" :key="index">{{ value }}</span>
     </aside>
     <div class="seperator"></div>
     <div class="content">
-      <p>Node.js的事件循环机制发生在各个阶段</p>
+      <p>{{ article.content }}</p>
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'ArticleDetail'
+  name: 'ArticleDetail',
+  data () {
+    return {
+      article: {
+        id: 1,
+        title: '深入理解js事件循环机制(Node.js篇)',
+        tags: 'javascript,eventloop,Node.js',
+        content: 'Node.js的事件循环机制发生在各个阶段'
+      }
+    }
+  },
+  computed: {
+    tagArr: function () {
+      return this.article.tags.split(',')
+    }
+  },
+  mounted: function () {
+    this.$http({
+      method: 'get',
+      url: '',
+      data: {
+        articleId: this.article.id
+      }
+    }).then((result) => {
+      console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 }
 </script>
 

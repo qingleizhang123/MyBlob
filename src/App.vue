@@ -1,31 +1,11 @@
 <template>
   <div id="app">
     <section class="left_side">
-      <div class="nav_title"></div>
-    <!--   <el-menu
-        :default-active="activeIndex2"
-        class="el-menu-demo"
-        mode="vertical"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b">
-        <el-menu-item index="1">个人中心</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">文章类别</template>
-          <el-menu-item index="2-1">随感</el-menu-item>
-          <el-menu-item index="2-2">旅行</el-menu-item>
-          <el-menu-item index="2-3">音乐</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">技术</template>
-            <el-menu-item index="2-4-1">Angular</el-menu-item>
-            <el-menu-item index="2-4-2">Vue</el-menu-item>
-            <el-menu-item index="2-4-3">React</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3">消息中心</el-menu-item>
-        <el-menu-item index="4">文章管理</el-menu-item>
-      </el-menu> -->
+      <div class="nav_title">
+        <ul >
+          <li v-for="item of titleList" :key="item.id" @click="toURL(item.title)">{{ item.title }}</li>
+        </ul>
+      </div>
     </section>
     <section class="right_side">
       <p>
@@ -44,13 +24,40 @@ export default {
   data () {
     return {
       activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex2: '1',
+      titleList: [
+        {id: 1, title: 'Angular', children: []},
+        {id: 2, title: 'React', children: []},
+        {id: 3, title: 'Vue', children: []},
+        {id: 4, title: 'Typescript', children: []}
+      ]
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    // 路由跳转及传参
+    toURL (title) {
+      this.$router.push({
+        name: 'ArticleOverview',
+        query: {
+          title: title
+        }
+      })
     }
+  },
+  // ajax请求获取页面初始化数据，后续封装http请求
+  mounted: function () {
+    this.$http({
+      method: 'get',
+      url: '',
+      data: {}
+    }).then((result) => {
+      console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 }
 </script>
@@ -63,25 +70,35 @@ export default {
   text-align: center;
   color: #2c3e50;
   width: 100%;
-  margin: auto;
-  min-height: 100%;
+  height: 100%;
   position: relative;
-  padding-bottom: 2em;
   display: flex;
+  flex-direction: row;
 }
 .left_side {
-  float: left;
   width: 240px;
   background-color: rgb(84, 92, 100);
 }
 .nav_title {
-  height: 800px;
+  height: 90vh;
+}
+.nav_title>ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.nav_title>ul>li {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: rgb(122,144,158);
 }
 .el-menu {
-  height: 800px;
+  height: 80vh;
 }
 .right_side {
-  flex: 13;
+  flex: 1;
   padding: 1em 1em;
   overflow: hidden;
 }
