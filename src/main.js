@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import QS from 'qs'
 import apis from './request/apis'
+import './assets/css/main.css'
 
 Vue.config.productionTip = false
 

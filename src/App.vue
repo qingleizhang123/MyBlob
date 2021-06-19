@@ -2,17 +2,25 @@
   <div id="app">
     <section class="left_side">
       <div class="nav_title">
-        <ul >
-          <li v-for="item of titleList" :key="item.id" @click="toURL(item.title)">{{ item.title }}</li>
-        </ul>
+        <nav>ABOUT THE AUTHOR</nav>
+        <div class="me">
+          <img class="portrait" src="./assets/images/avatar.jpg" @click="toBackHome('Home')"/>
+          <p class="introduce">
+            This is My personal blog where I share a lot of stuffs about my life and work <br>
+            everything i do in between
+          </p>
+        </div>
+        <nav class="nav">NAVIGATION</nav>
+        <div class="contianer">
+          <ul >
+            <li v-for="item of titleList" :key="item.id" @click="toURL(item.title)">
+              <span>{{ item.title }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
     <section class="right_side">
-      <p>
-        <router-link to="/">Go to Home</router-link>
-        <router-link to="/articleOverview">Go to Overview</router-link>
-        <router-link to="/articleDetail">Go to Detail</router-link>
-      </p>
       <router-view/>
     </section>
   </div>
@@ -45,6 +53,11 @@ export default {
           title: title
         }
       })
+    },
+    toBackHome (name) {
+      this.$router.push({
+        name: name
+      })
     }
   },
   // ajax请求获取页面初始化数据，后续封装http请求
@@ -69,34 +82,58 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 100%;
+  width: 1000px;
   height: 100%;
   position: relative;
   display: flex;
   flex-direction: row;
+  margin: auto;
+}
+nav {
+  display: inline-block;
+  border-bottom: 3px solid #eee;
+  font-weight: 600;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 .left_side {
-  width: 240px;
-  background-color: rgb(84, 92, 100);
+  padding: 2em 2em 2em 4em;
+  box-sizing: border-box;
+  font-size: 14px;
+  width: 265px;
+  height: calc(100% - 30px);
+  font-family: Angelina, Tahoma;
+  border-right: 2px solid #eee;
+  background: #fff;
 }
-.nav_title {
-  height: 90vh;
+.me {
+  margin: 10px auto;
 }
-.nav_title>ul {
+.me>.portrait {
+  display: block;
+  width: 180px;
+  height: 180px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.me>p {
+  margin: 2em 0;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+.contianer>ul {
   list-style: none;
   padding: 0px;
   margin: 0px;
+  display: block;
 }
-.nav_title>ul>li {
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  font-size: 14px;
-  color: rgb(122,144,158);
+.contianer>ul li {
+  position: relative;
+  display: block;
+  margin: 1.5em 0;
 }
-.el-menu {
-  height: 80vh;
-}
+
 .right_side {
   flex: 1;
   padding: 1em 1em;

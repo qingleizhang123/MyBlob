@@ -21,13 +21,13 @@ export default {
 
 <style scope>
 .el-carousel__container {
-  height: 400px;
+  height: 30rem;
 }
 .el-carousel__item h3 {
   color: #475669;
-  font-size: 18px;
+  font-size: 1.8rem;
   opacity: 0.75;
-  line-height: 400px;
+  line-height: 30rem;
   margin: 0;
 }
 
