@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import HelloWorld1 from '@/components/HelloWorld1'
 import ArticleOverview from '@/components/ArticleOverview'
 import ArticleDetail from '@/components/ArticleDetail'
+import ArticleEdit from '@/components/ArticleEdit'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/articleDetail',
       name: 'ArticleDetail',
       component: ArticleDetail
+    },
+    {
+      path: '/articleEdit',
+      name: 'ArticleEdit',
+      component: ArticleEdit
     }
   ]
 })

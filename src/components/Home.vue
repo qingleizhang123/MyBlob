@@ -5,6 +5,11 @@
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
+  <div class="heart">
+    <div class="disc1"></div>
+    <div class="disc2"></div>
+    <div class="square"></div>
+  </div>
   </div>
 </template>
 
@@ -37,5 +42,42 @@ export default {
 
 .el-carousel__item:nth-child(2n+1) {
   background-color: #d3dce6;
+}
+
+.disc1 {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 100%;
+  margin: 30rem 0 0 30rem;
+  float: left;
+}
+
+.disc2 {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 100%;
+  margin: 25rem 0 0 0;
+  float: left;
+  position: relative;
+  right: 5rem;
+}
+
+.square {
+  width: 10rem;
+  height: 10rem;
+  border: 0.1rem solid red;
+  background-color: red;
+  margin: 30rem 0 0 0;
+  float: left;
+  position: relative;
+  right: 15rem;
+}
+
+.heart {
+  transform: rotate(45deg);
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <section class="left_side">
+      <router-view/>
+    </section>
+    <section class="right_side">
       <div class="nav_title">
         <nav>ABOUT THE AUTHOR</nav>
         <div class="me">
           <img class="portrait" src="./assets/images/avatar.jpg" @click="toBackHome('Home')"/>
           <p class="introduce">
-            This is My personal blog where I share a lot of stuffs about my life and work <br>
-            everything i do in between
+            {{ person.description }}
           </p>
         </div>
         <nav class="nav">NAVIGATION</nav>
@@ -18,10 +20,12 @@
             </li>
           </ul>
         </div>
+        <div class="other">
+          <ul>
+            <li @click="toArticleEdit()">新建文章</li>
+          </ul>
+        </div>
       </div>
-    </section>
-    <section class="right_side">
-      <router-view/>
     </section>
   </div>
 </template>
@@ -38,7 +42,8 @@ export default {
         {id: 2, title: 'React', children: []},
         {id: 3, title: 'Vue', children: []},
         {id: 4, title: 'Typescript', children: []}
-      ]
+      ],
+      person: {}
     }
   },
   methods: {
@@ -58,16 +63,22 @@ export default {
       this.$router.push({
         name: name
       })
+    },
+    toArticleEdit () {
+      this.$router.push({
+        name: 'ArticleEdit'
+      })
     }
   },
   // ajax请求获取页面初始化数据，后续封装http请求
   mounted: function () {
     this.$http({
       method: 'get',
-      url: '',
+      url: '/api/v1/person/resume',
       data: {}
     }).then((result) => {
-      console.log(result)
+      this.person = result.data.data
+      console.log(this.person)
     }).catch((err) => {
       console.log(err)
     })
@@ -82,7 +93,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 1000px;
+  width: 1120px;
   height: 100%;
   position: relative;
   display: flex;
@@ -96,7 +107,7 @@ nav {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
-.left_side {
+.right_side {
   padding: 2em 2em 2em 4em;
   box-sizing: border-box;
   font-size: 14px;
@@ -122,6 +133,9 @@ nav {
   font-size: 1.2em;
   line-height: 1.2em;
 }
+.contianer {
+  border-bottom: 1px solid #eee;
+}
 .contianer>ul {
   list-style: none;
   padding: 0px;
@@ -134,9 +148,14 @@ nav {
   margin: 1.5em 0;
 }
 
-.right_side {
+.left_side {
   flex: 1;
   padding: 1em 1em;
   overflow: hidden;
+}
+
+.other ul {
+  list-style: none;
+  padding: 0;
 }
 </style>
