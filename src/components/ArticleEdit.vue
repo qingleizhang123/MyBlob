@@ -15,7 +15,7 @@
       <el-form-item label="标签">
         <el-tag
         :key="tag"
-        v-for="tag in dynamicTags"
+        v-for="tag in form.tags"
         closable
         :disable-transitions="false"
         @close="handleClose(tag)">
@@ -49,13 +49,13 @@ export default {
   name: 'ArticleEdit',
   data () {
     return {
-      dynamicTags: ['Angular', 'React', 'Vue'],
       inputVisible: false,
       inputValue: '',
       form: {
         titleName: '',
         type: '',
-        content: ''
+        content: '',
+        tags: []
       }
     }
   },
@@ -64,10 +64,24 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('submit!')
+      console.log(this.form)
+      this.$http({
+        method: 'post',
+        url: '/api/v1/article/create',
+        data: { title: this.form.titleName, author: 'ces', content: this.form.content, category: this.form.type }
+      }).then((result) => {
+        console.log(result.data.data)
+        this.$message({
+          message: '发布成功！',
+          type: 'success'
+        })
+        // todo 跳转到想去页
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     handleClose (tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+      this.form.tags.splice(this.form.tags.indexOf(tag), 1)
     },
 
     showInput () {
@@ -80,7 +94,7 @@ export default {
     handleInputConfirm () {
       let inputValue = this.inputValue
       if (inputValue) {
-        this.dynamicTags.push(inputValue)
+        this.form.tags.push(inputValue)
       }
       this.inputVisible = false
       this.inputValue = ''
